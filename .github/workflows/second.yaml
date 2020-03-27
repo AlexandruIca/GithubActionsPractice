@@ -15,6 +15,22 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Cache Qt
+      id: cache-qt
+      uses: actions/cache@v1
+      with:
+          path: ../Qt
+          key: QtCache
+
+    - name: Install Qt5
+      uses: jurplel/install-qt-action@v2
+      with:
+          version: '5.14.1'
+          host: 'linux'
+          target: 'desktop'
+          modules: 'qtcharts qtwebengine'
+          cached: ${{ steps.cache-qt.outputs.cache-hit }}
+
     - name: Install ninja-build and cmake
       run: |
           sudo apt install ninja-build cmake
