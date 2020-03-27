@@ -11,3 +11,10 @@ target_include_directories(adder-shared PUBLIC ${ADDER_INCLUDE_DIR})
 
 target_link_libraries(adder PRIVATE project_warnings project_options)
 target_link_libraries(adder-shared PRIVATE project_warnings project_options)
+
+install(
+  TARGETS adder adder-shared
+  LIBRARY DESTINATION lib
+  ARCHIVE DESTINATION lib/static)
+
+install(DIRECTORY ${ADDER_INCLUDE_DIR} DESTINATION include)
